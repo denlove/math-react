@@ -1,0 +1,60 @@
+name: Development
+
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches:
+            - master
+        types:
+            - opened
+            - edited
+            - synchronize
+            - reopened
+    workflow_call:
+
+jobs:
+    test:
+        name: Testing stage
+        runs-on: ubuntu-latest
+        timeout-minutes: 3
+        steps:
+            - name: '☁️ Checkout repository'
+              uses: actions/checkout@v4.1.1
+
+            - name: '🔧 Setup node'
+              uses: actions/setup-node@v4.0.1
+              with:
+                  node-version: 20
+
+            - name: '🔧 Install npm@latest'
+              run: npm i -g npm@latest
+
+            - name: '📦 Install dependencies'
+              run: npm i
+
+            - name: '🔍 Run tests'
+              run: npm test -- --coverage
+
+    lint:
+        name: Linting stage
+        runs-on: ubuntu-latest
+        timeout-minutes: 1
+        steps:
+            - name: '☁️ Checkout repository'
+              uses: actions/checkout@v4.1.1
+
+            - name: '🔧 Setup node'
+              uses: actions/setup-node@v4.0.1
+              with:
+                  node-version: 20
+
+            - name: '🔧 Install npm@latest'
+              run: npm i -g npm@latest
+
+            - name: '📦 Install dependencies'
+              run: npm i
+
+            - name: '🔍 Lint code'
+              run: npm run lint --if-present
