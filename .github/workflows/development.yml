@@ -32,7 +32,7 @@ jobs:
               run: npm i -g npm@latest
 
             - name: "📦 Install dependencies"
-              uses: bahmutov/npm-install@v1.8.36
+              run: npm i
 
             - name: "🔍 Run tests"
               run: npm run test --if-present
@@ -54,7 +54,7 @@ jobs:
               run: npm i -g npm@latest
 
             - name: "📦 Install dependencies"
-              uses: bahmutov/npm-install@v1.8.36
+              run: npm i
 
             - name: "🔍 Lint code"
               run: npm run lint --if-present
