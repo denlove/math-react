@@ -18,7 +18,13 @@ const App = () => {
             <Theme theme={theme[currentTheme as keyof ITheme]}>
                 <StyledApp className="App">
                     <h1>Hello</h1>
-                    <button onClick={() => setCurrentTheme(prev => (prev === 'light' ? 'dark' : 'light'))}>
+                    <button
+                        onClick={() =>
+                            setCurrentTheme(prev =>
+                                prev === 'light' ? 'dark' : 'light',
+                            )
+                        }
+                    >
                         Switch theme
                     </button>
                 </StyledApp>
