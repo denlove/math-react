@@ -1,35 +1,18 @@
-import styled from 'styled-components'
-import Theme from './styles/themes/Theme'
-import GlobalStyles from './styles/index.styled'
-import { useState } from 'react'
-import { ITheme, theme } from './styles/themes/theme'
-
-const StyledApp = styled.div`
-    color: hsl(0, 0%, 10%);
-    background-color: ${({ theme }) => theme.backgroundColor};
-`
+import { Route, Routes } from 'react-router-dom'
+import Home from './pages/Home'
+import Layout from './pages/Layout'
+import About from './pages/About'
+import NotFound from './pages/NotFound'
 
 const App = () => {
-    const [currentTheme, setCurrentTheme] = useState<string>('dark')
-
     return (
-        <>
-            <GlobalStyles />
-            <Theme theme={theme[currentTheme as keyof ITheme]}>
-                <StyledApp className="App">
-                    <h1>Hello</h1>
-                    <button
-                        onClick={() =>
-                            setCurrentTheme(prev =>
-                                prev === 'light' ? 'dark' : 'light',
-                            )
-                        }
-                    >
-                        Switch theme
-                    </button>
-                </StyledApp>
-            </Theme>
-        </>
+        <Routes>
+            <Route path='/' element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path='about' element={<About />} />
+                <Route path='*' element={<NotFound />} />
+            </Route>
+        </Routes>
     )
 }
 
